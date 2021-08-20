@@ -10,11 +10,34 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
   focusScore$ = mind.focus().pipe(
-    map((focus) => focus.probability * 100),
+    map((focus) => {
+      console.log(focus);
+      return (focus.probability * 100)
+    }),
     tap((focusScore) => {
       console.log(focusScore);
     })
   );
+
+  calmScore$ = mind.calm().pipe(
+    map((calm) => {
+      console.log(calm);
+      return (calm.probability * 100)
+    }),
+    tap((calmScore) => {
+      console.log(calmScore);
+    })
+  );
+
+  // accelerometerScore$ = mind. accelerometer().pipe(
+  //   map((accelerometer) => {
+  //     console.log(accelerometer);
+  //     return (accelerometer.probability * 100)
+  //   }),
+  //   tap((accelerometerScore) => {
+  //     console.log(accelerometerScore);
+  //   })
+  // );
 
   ngOnInit() {
     mind
@@ -22,7 +45,7 @@ export class AppComponent implements OnInit {
         email: environment.email,
         password: environment.password,
       })
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.log(error);
       });
